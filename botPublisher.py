@@ -10,24 +10,30 @@ def botPublisher():
     rospy.init_node('botPublisher', anonymous=True)
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
-        #TODO: Add movement code here
-        #move = 0 (stop), move = 1 (forward), move = 2(rotate)
-        #Might need to use /cmd_vel to control robot
 
         move = 0
 
         msg = Twist()
+        #Stop
         if move == 0:
             msg.linear.x = 0.0
             msg.angular.z = 0.0
-
+        #Move forward
         if move == 1:
             msg.linear.x = 0.5
             msg.angular.z = 0.0
-
+        #Rotate left
         if move == 2:
             msg.linear.x = 0.0
             msg.angular.z = 1.0
+        #Rotate right
+        if move == 3:
+            msg.linear.x = 0.0
+            msg.angular.z = -1.0
+        #Move backwards
+        if move == 4:
+            msg.linear.x = -0.5
+            msg.angular.z = 0.0
 
         rospy.loginfo(msg)
         pub.publish(msg)
