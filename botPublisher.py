@@ -14,10 +14,20 @@ def botPublisher():
         #move = 0 (stop), move = 1 (forward), move = 2(rotate)
         #Might need to use /cmd_vel to control robot
 
-        #move = 0
+        move = 0
 
         msg = Twist()
-        msg.angular.z = 1.0
+        if move == 0:
+            msg.linear.x = 0.0
+            msg.angular.z = 0.0
+
+        if move == 1:
+            msg.linear.x = 0.5
+            msg.angular.z = 0.0
+
+        if move == 2:
+            msg.linear.x = 0.0
+            msg.angular.z = 1.0
 
         rospy.loginfo(msg)
         pub.publish(msg)
